@@ -47,6 +47,7 @@ void draw()
     for (int i = 0; i < width + 1; i++)
         cout << "#";
     cout << endl;
+    cout << "Score: " << score << endl;
 }
 
 /* отслеживает нажатия пользователя */
@@ -60,12 +61,16 @@ void input()
             break;
         case 'd':
             dir = RIGHT;
+            break;
         case 'w':
             dir = UP;
+            break;
         case 's':
             dir = DOWN;
+            break;
         case 'x':
             gameOver = true;
+            break;
         }
     }
 }
@@ -87,6 +92,14 @@ void logic()
     case DOWN:
         y++;
         break;
+    }
+
+    if (x > width || x < 0 || y > height || y < 0)
+        gameOver = true;
+    if (x == fruitX && y == fruitY) {
+        score += 10;
+        fruitX = rand() % width;
+        fruitY = rand() % height;
     }
 }
 
